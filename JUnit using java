@@ -1,0 +1,166 @@
+package junitTest1;
+
+import java.time.Duration;
+
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class JavaTestJunit {
+	
+	WebDriver driver;
+	int implicitTimeout = 30;
+
+
+	@Before
+	public void setUp() throws Exception {
+
+		String cd = "C:\\Users\\Geeks4Learning\\OneDrive\\Desktop\\ChromeDriver\\chromedriver.exe";
+		System.setProperty("webdriver.chrome.driver",cd);
+
+		driver= new ChromeDriver();
+	
+		
+		String baseURL = "https://petstore.octoperf.com";
+		driver.get(baseURL);
+		
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitTimeout));
+		driver.manage().window().maximize();
+		
+		//String landingPageMessage = "Welcome to JPetStore 6";
+		//String errmsg1 = "Not on landing page";
+		//String bodytext1 = driver.findElement(By.tagName("body")).getText();
+		//System.out.println("bodytext=" + bodytext1);
+		//Assert.assertTrue(errmsg1, bodytext1.contains(landingPageMessage));
+		
+	}
+	 
+	@After
+	public void tearDown() throws Exception {
+				
+		driver.quit();
+	}
+
+	@Test
+	public void testLogin() //code to log in 
+	{
+		String landingPageMessage = "Welcome to JPetStore 6";
+		String errmsg1 = "Not on landing page";
+		String bodytext1 = driver.findElement(By.tagName("body")).getText();
+		System.out.println("bodytext=" + bodytext1);
+		Assert.assertTrue(errmsg1, bodytext1.contains(landingPageMessage));
+		
+		driver.findElement(By.xpath("/html/body/div/p[1]/a")).click();
+		//click on sign in 
+		driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/a[2]")).click();
+		//entering user name 
+		driver.findElement(By.xpath("/html/body/div[2]/div/form/p[2]/input[1]")).sendKeys("Vandal1234");
+		// clear password already set
+		driver.findElement(By.xpath("//*[@id=\"Catalog\"]/form/p[2]/input[2]")).clear();
+		//enter password
+		driver.findElement(By.xpath("//*[@id=\"Catalog\"]/form/p[2]/input[2]")).sendKeys("@Whinay123");
+		//click on signIn
+		driver.findElement(By.xpath("//*[@id=\"Catalog\"]/form/input")).click();
+		 
+	}
+	@Test
+	public void testNavigate() //code to navigate on web page 
+	{ 
+		
+		driver.findElement(By.xpath("/html/body/div/p[1]/a")).click();
+		//click on sign in 
+		driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/a[2]")).click();
+		//entering user name 
+		driver.findElement(By.xpath("/html/body/div[2]/div/form/p[2]/input[1]")).sendKeys("Vandal1234");
+		// clear password already set
+		driver.findElement(By.xpath("//*[@id=\"Catalog\"]/form/p[2]/input[2]")).clear();
+		//enter password
+		driver.findElement(By.xpath("//*[@id=\"Catalog\"]/form/p[2]/input[2]")).sendKeys("@Whinay123");
+		//click on signIn
+		driver.findElement(By.xpath("//*[@id=\"Catalog\"]/form/input")).click();
+		// select product (Dog) to purchase 
+		driver.findElement(By.xpath("//*[@id=\"SidebarContent\"]/a[2]")).click();
+		
+		String ProductPageMessage = "Dalmation";
+		String bodytext = driver.findElement(By.tagName("tbody")).getText();
+		String errmsg = "Not on Dog screen";
+		Assert.assertTrue(errmsg, bodytext.contains(ProductPageMessage));
+		System.out.println(ProductPageMessage);
+		
+		}
+	
+	
+	@Test
+	public void TestPurchase() // Code to purchase item 
+	{
+		driver.findElement(By.xpath("/html/body/div/p[1]/a")).click();
+		//click on sign in 
+		driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/a[2]")).click();
+		//entering user name 
+		driver.findElement(By.xpath("/html/body/div[2]/div/form/p[2]/input[1]")).sendKeys("Vandal1234");
+		// clear password already set
+		driver.findElement(By.xpath("//*[@id=\"Catalog\"]/form/p[2]/input[2]")).clear();
+		//enter password
+		driver.findElement(By.xpath("//*[@id=\"Catalog\"]/form/p[2]/input[2]")).sendKeys("@Whinay123");
+		//click on signIn
+		driver.findElement(By.xpath("//*[@id=\"Catalog\"]/form/input")).click();
+		// select product (Dog) to purchase 
+		driver.findElement(By.xpath("//*[@id=\"SidebarContent\"]/a[2]")).click();
+		//select dog type (Dalmation)
+		driver.findElement(By.xpath("/html/body/div[2]/div[2]/table/tbody/tr[4]/td[1]/a")).click();
+				
+		String ProductPageMessage = "Spotless Male Puppy Dalmation";
+		String bodytext = driver.findElement(By.tagName("tbody")).getText();
+		String errmsg = "Not correct product";
+		Assert.assertTrue(errmsg, bodytext.contains(ProductPageMessage));
+		System.out.println(ProductPageMessage);
+		
+		// select type of dalmation (male spotless)
+		driver.findElement(By.xpath("//*[@id=\"Catalog\"]/table/tbody/tr[2]/td[1]/a")).click();
+		//click on add to cart
+		driver.findElement(By.xpath("//*[@id=\"Catalog\"]/table/tbody/tr[7]/td/a")).click();
+		// click on  proceed to checkout
+		driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[1]/a")).click();
+		//click on continue 
+		driver.findElement(By.xpath("//*[@id=\"Catalog\"]/form/input")).click();
+		//click on confirm
+		driver.findElement(By.xpath("/html/body/div[2]/div[2]/a")).click();
+				
+				
+	}
+	
+	@Test
+	public void ItemSearchTest() //code to test product search
+	{
+		driver.findElement(By.xpath("/html/body/div/p[1]/a")).click();
+		//click on sign in 
+		driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/a[2]")).click();
+		//entering user name 
+		driver.findElement(By.xpath("/html/body/div[2]/div/form/p[2]/input[1]")).sendKeys("Vandal1234");
+		// clear password already set
+		driver.findElement(By.xpath("//*[@id=\"Catalog\"]/form/p[2]/input[2]")).clear();
+		//enter password
+		driver.findElement(By.xpath("//*[@id=\"Catalog\"]/form/p[2]/input[2]")).sendKeys("@Whinay123");
+		//click on signIn
+		driver.findElement(By.xpath("//*[@id=\"Catalog\"]/form/input")).click();
+		
+		driver.findElement(By.name("keyword")).sendKeys("Rattlesnake");
+		driver.findElement(By.name("searchProducts")).click();
+		
+		String ProductPageMessage = "Rattlesnake";
+		String bodytext = driver.findElement(By.tagName("tbody")).getText();
+		String errmsg = "Not correct product";
+		Assert.assertTrue(errmsg, bodytext.contains(ProductPageMessage));
+		System.out.println(ProductPageMessage);
+		
+	}
+	
+	
+}
+
+	
+
