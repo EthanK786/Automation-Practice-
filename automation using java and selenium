@@ -1,0 +1,101 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+public class Jpetstore {
+
+	public static void main(String[] args) throws Exception {
+		
+		
+	System.setProperty("webdriver.chrome.driver", "C:\\Users\\Geeks4Learning\\OneDrive\\Desktop\\ChromeDriver\\chromedriver.exe");
+
+	
+	WebDriver driver= new ChromeDriver();
+	String baseURL = "https://petstore.octoperf.com";
+	
+	//opening web page above (baseURL)
+	driver.get(baseURL);
+	
+	
+	// maximize web page 
+	driver.manage().window().maximize();
+	   
+	
+	//click on enter
+	driver.findElement(By.xpath("/html/body/div/p[1]/a")).click();
+	
+	
+	
+	//click on sign in 
+	driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/a[2]")).click();
+	
+	
+	Thread.sleep(1000);
+	//entering user name 
+	driver.findElement(By.xpath("/html/body/div[2]/div/form/p[2]/input[1]")).sendKeys("EthanK123");
+	
+	
+	// clear password already set
+	driver.findElement(By.xpath("//*[@id=\"Catalog\"]/form/p[2]/input[2]")).clear();
+	
+	Thread.sleep(1000);
+	//enter password
+	driver.findElement(By.xpath("//*[@id=\"Catalog\"]/form/p[2]/input[2]")).sendKeys("@Ethan786");
+	
+	Thread.sleep(1000);
+	//click on signIn
+	driver.findElement(By.xpath("//*[@id=\"Catalog\"]/form/input")).click();
+	
+	Thread.sleep(1000);
+	// select product (Dog) to purchase 
+	driver.findElement(By.xpath("//*[@id=\"SidebarContent\"]/a[2]")).click();
+	
+	Thread.sleep(1000);
+	//select dog type (Dalmation)
+	driver.findElement(By.xpath("/html/body/div[2]/div[2]/table/tbody/tr[4]/td[1]/a")).click();
+	
+	Thread.sleep(1000);
+	// select type of dalmation (male spotless)
+	driver.findElement(By.xpath("//*[@id=\"Catalog\"]/table/tbody/tr[2]/td[1]/a")).click();
+	
+	Thread.sleep(1000);
+	//click on add to cart
+	driver.findElement(By.xpath("//*[@id=\"Catalog\"]/table/tbody/tr[7]/td/a")).click();
+	
+	Thread.sleep(1000);
+	// click on  proceed to checkout
+	driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[1]/a")).click();
+	
+	Thread.sleep(1000);
+	//click on continue 
+	driver.findElement(By.xpath("//*[@id=\"Catalog\"]/form/input")).click();
+	
+	Thread.sleep(1000);
+	//click on confirm
+	driver.findElement(By.xpath("/html/body/div[2]/div[2]/a")).click();
+	
+	Thread.sleep(1000);
+	//click on return to main menu
+	driver.findElement(By.xpath("/html/body/div[2]/div[1]/a")).click();
+	
+	Thread.sleep(1000);
+	//click on sign out
+	driver.findElement(By.xpath("//*[@id=\"MenuContent\"]/a[2]")).click();
+
+	Thread.sleep(1000);
+	
+	//close window
+	driver.close();
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+
+}
